@@ -1,0 +1,166 @@
+* {
+    margin: 0 auto;
+}
+:root {
+    --line-border-fill: #3498db;
+    --line-border-empty: #e0e0e0;
+  
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevents horizontal scroll */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    width: 100vw;
+
+}
+.purpose-container {
+    margin-left: 2vw;
+    margin-right: 2vw;
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+}
+
+.purpose-image, .purpose-text {
+    height: 100%;
+    width: 50%;
+}
+
+.purpose-title{
+    text-align: center;
+    font-size: 20px;
+    color:#3498db;
+    font-weight: bold;
+
+}
+.purpose-desc {
+    padding-left: 2vw;
+    margin-top: 5vh;
+    font-size: 14px;
+
+}
+
+.purpose-image img, .owner-image img {
+    object-fit: contain;
+    width: 690px;
+    height: 700px;
+
+}
+
+.purpose-body {
+    margin-top: 3vh;
+    padding-left: 4vw;
+    font-size: 12px;
+
+
+}
+.purpose-1, .purpose-2, .purpose-3, .purpose-4, .purpose-5{
+    text-align: left;
+    margin-top: 5vh;
+}
+
+.owner-container {
+    margin-left: 2vw;
+    margin-right: 2vw;
+    margin-top: 0;
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+.owner-text {
+    height: 100%;
+    width: 50%;
+}
+
+.owner-image {
+    height: 100%;
+    width: 50%;
+}
+.owner-name {
+    padding: 3vh 0;
+
+    text-align: center;
+    font-size: 30px;
+    color:#3498db;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+
+}
+.owner-desc {
+    font-size: 12px;
+    height: fit-content;
+}
+
+footer {
+    height: 20vh;
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    background-color: #3498db;
+}
+
+.about-site, .contact {
+    width: 30%;
+    height: 100%;
+}
+.contact{
+    float: right;
+}
+.website-name {
+    margin-left: 2vw;
+    margin-top: 2vh;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: bold;
+
+}
+.website-desc {
+    margin-left: 2vw;
+    margin-top: 2vh;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+
+
+
+}
+
+.contact-title {
+    margin-left: 2vw;
+    margin-top: 2vh;
+    font-weight: bold;
+}
+.contact-info {
+    font-size: 12px;
+    margin-left: 2vw;
+    margin-top: 2vh;
+
+}
+.contact-note{
+    margin-left: 2vw;
+    margin-top: 2vh;
+    font-size: 10px;
+}
+
+.relevant-links {
+    width: 30%;
+}
+
+.relevant-title {
+    margin-left: 2vw;
+    margin-top: 2vh;
+    font-weight: bold;
+
+}
+.all-links {
+    margin-left: 2vw;
+    margin-top: 2vh;
+    font-size: 12px;
+    cursor: pointer;
+
+}
+    

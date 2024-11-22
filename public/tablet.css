@@ -1,0 +1,109 @@
+/* tablet */
+@media (min-width: 768px) and (max-width: 1025px) {
+    .hero-container {
+        margin-top: 13vh;
+        margin-left: 2vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+    }
+
+    .hero-img {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+        margin-top: 0;
+        margin-bottom: 2vh;
+        
+    }
+    .hero-img img {
+        object-fit: contain;
+        height: fit-content;
+        width: 100%;
+    
+    }
+    .hero-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-left: 0;
+        width: 100%;
+        margin-top: -6vh;
+        padding-top: 0;
+    }
+    .hero-title {
+        font-size: 30px;
+        font-weight: bold;
+    }
+    .hero-desc {
+        margin-top: 5vh;
+        height: fit-content;
+    }
+    .hero-text-wrapper {
+        margin-left: 3vw;
+        margin-bottom: 5vh;
+        height: fit-content;
+
+
+    }
+
+    .hero-text-buttons {
+        margin-left: 3vw;
+        margin-right: 50vw;
+        margin-bottom: 15vh;
+        margin-top: 0;
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .hero-text-buttons > button {
+        margin-left: 0;
+        cursor: pointer;
+        width: 20vw;
+        height: 6vh;
+        border-radius: 5px;
+        font-size: 18px;
+    }
+    
+    .hero-text-post {
+        background-color: #eee;
+        border: 1px solid #eee;
+        color: black;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Box shadow */
+    
+    }
+    .hero-text-learn{
+        background-color: #0D92F4;
+        border: 1px solid#0D92F4;
+        color: white;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Box shadow */
+    }
+
+    .nav-links {
+        margin-right: 2vw;
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .nav-links > button {
+        margin-left: 1vw;
+        cursor: pointer;
+        width: 10vw;
+        height: 4vh;
+        background: none;
+        border: 1px solid #eee;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+
+    .loading {
+        padding-left: 15%;
+        margin-top: 35%;
+       }
+    
+
+    
+    
+
+}

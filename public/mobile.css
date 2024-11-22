@@ -1,0 +1,216 @@
+/* mobile */
+@media (max-width: 600px){
+
+    .navbar-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 10vh;
+        width: 100vw;
+    }
+
+    .nav-logo {
+        margin-left: 2vw;
+        font-weight: bold;
+        font-size: 12px;
+        font-family: 'Space Grotesk', sans-serif;
+        transition: 0.3s color ease;
+        cursor: pointer;
+        
+    }
+    .nav-logo:hover {
+        color: #0D92F4;
+    
+    }
+    .nav-links {
+        margin-right: 2vw;
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .nav-links > button {
+        margin-left: 1vw;
+        cursor: pointer;
+        width: 20vw;
+        height: 4vh;
+        background: none;
+        border: 1px solid #eee;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+    
+    .scan:hover, .post:hover {
+        background-color: #0D92F4;
+        border-color: #0D92F4;
+        color: white;
+    
+    }
+    
+
+    /*display section*/
+    .display-container {
+        margin-left: 0;
+        margin-right: 0;
+        height: 100%;
+        width: 100vw;
+    }
+    
+    .hero-container {
+        margin: 5vh 2vw;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .hero-text {
+        width: 50%;
+
+    }
+    .hero-img {
+        margin-left: 0;
+        margin-right: 0;
+        display: none;
+
+    }
+    .hero-img img {
+        object-fit: contain;
+        height: 200px;
+    
+    }
+    .hero-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-left: 0;
+        margin-right: 0;
+        width: 100vw;
+    }
+    .hero-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-left: 5vw;
+    }
+    .hero-desc {
+        margin-top: 5vh;
+        font-size: 12px;
+        height: fit-content;
+        width: 80vw;
+        margin-left: 5vw;
+    }
+    .hero-text-wrapper {
+        margin-left: 2vw;
+        margin-right: 2vw;
+        margin-top: 5vh;
+        height: fit-content;
+    }
+    
+    .hero-text-buttons {
+        margin-left: 5vw;
+        margin-right: 15vw;
+        margin-bottom: 5vh;
+        margin-top: 12vh;
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .hero-text-buttons > button {
+        margin-left: 0;
+        cursor: pointer;
+        width: 30vw;
+        height: 6vh;
+        border-radius: 5px;
+    }
+    
+    .hero-text-post {
+        background-color: #eee;
+        border: 1px solid #eee;
+        color: black;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Box shadow */
+    
+    }
+    .hero-text-learn{
+        background-color: #0D92F4;
+        border: 1px solid#0D92F4;
+        color: white;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Box shadow */
+    }
+
+
+  .modal-content {
+    font-size: 16px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  .form-container {
+    width: 90%;
+    height: 60vh;
+    margin-left: -2vw;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 5vh;
+}
+#progressiveForm {
+    margin-top: 2vh;
+}
+.loading {
+    padding-left: 10%;
+    margin-top: 45%;
+   }
+
+   .loading span {
+    display: inline-block;
+    vertical-align:middle;
+    width: 1.5em;
+    height: 1.5em;
+    margin: .19em;
+    background: #007DB6;
+    border-radius: .6em;
+    animation: loading 1s infinite alternate;
+  }
+
+  /* Modal content */
+  .payment-modal-content {
+    background-color: #fff;
+    margin: 35% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Close button #3498db*/
+.payment-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.declineBtn, .acceptBtn {
+    height: 5vh;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 35vw;
+}
+.acceptBtn {
+    background-color: #4379F2;
+    border: 1px solid #4379F2;
+    color: white;
+}
+.declineBtn {
+    background-color: #eee;
+    border: #eee;
+}
+
+    
+
+
+}

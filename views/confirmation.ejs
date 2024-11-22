@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>RRDB | Payment Confirmation</title>
+        <script src="https://js.stripe.com/v3/"></script>
+        
+    
+    </head>
+    <body>
+
+        <div>Your order is confirmed</div>
+        <div class="message" id="message"></div>
+
+
+        
+    </body>
+
+    <script>
+        // Initialize Stripe.js using your publishable key
+        const stripe = Stripe('pk_test_51PEkXvP0j5CwKC7XOfzWR9sroCd8iCTj8a3d2z7F6Q2wEXNkBTOquGFfA4nyX2yCxLdUbxTwFZeAaN2IESwn7G3M00k7X1ZD7K');
+
+        // Retrieve the "payment_intent_client_secret" query parameter appended to
+        // your return_url by Stripe.js
+        const clientSecret = new URLSearchParams(window.location.search).get(
+        'payment_intent_client_secret'
+        );
+
+async function processInfo() {
+
+    try{
+        console.log("i hit here 1!")
+
+        const userData = JSON.parse(sessionStorage.getItem('userData'));
+        const videoUrl = JSON.parse(sessionStorage.getItem('video_url'));
+        const photoID = JSON.parse(sessionStorage.getItem('photo_id'));
+
+        console.log(userData); // { name: 'John Doe', age: 30 }
+        console.log("i hit here 2!")
+        const payload = {
+            "userData": userData,
+            "videoUrl": videoUrl,
+            "photoID": photoID
+        }
+
+
+        const response = await fetch('http://localhost:5001/create-report', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+                
+        const data = await response.json();
+        console.log("i hit here 3!")
+        console.log('Response from python backend: ', data);
+        window.location.href = '/';
+
+
+    }catch(err) {
+        console.log("error: ", err.message);
+
+    }
+
+}
+
+// Retrieve the PaymentIntent
+stripe.retrievePaymentIntent(clientSecret).then(({paymentIntent}) => {
+  const message = document.querySelector('#message')
+
+  // Inspect the PaymentIntent `status` to indicate the status of the payment
+  // to your customer.
+  //
+  // Some payment methods will [immediately succeed or fail][0] upon
+  // confirmation, while others will first enter a `processing` state.
+  //
+  // [0]: https://stripe.com/docs/payments/payment-methods#payment-notification
+  switch (paymentIntent.status) {
+    case 'succeeded':
+      message.innerText = 'Success! Payment received.';
+      processInfo();
+      console.log("payment confirmed")
+
+      
+      break;
+
+    case 'processing':
+      message.innerText = "Payment processing. We'll update you when payment is received.";
+      break;
+
+    case 'requires_payment_method':
+      message.innerText = 'Payment failed. Please try another payment method.';
+      // Redirect your user back to your payment page to attempt collecting
+      // payment again
+      break;
+
+    default:
+      message.innerText = 'Something went wrong.';
+      break;
+  }
+});
+    </script>
+</html>

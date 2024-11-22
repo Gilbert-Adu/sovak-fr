@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=comment" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_outward" />
+        <title>RapeReportDB</title>
+        <meta name="description" content="A Publicly-Available, Searchable and Scrapeable Database for Persons who have been Raped, or experienced any other form of Sexual Misconduct (Sexual Assault, Sexual Abuse or Sexual Harassment), to Report what was Done to them, so the whole-World can See and Know about it, in-Perpetuity.">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="./index.css"> 
+        <link rel="stylesheet" href="./mobile.css"> 
+        <link rel="stylesheet" href="./tablet.css"> 
+
+
+    </head>
+    <body>
+
+        <div class="container">
+            <!--navbar-->
+            <div class="navbar-container">
+                <div class="nav-logo">Rape Report DB</div>
+                <div class="search-container"  id="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search...">
+                </div>
+                <div class="nav-links">
+                    <button class="scan" id="scan">Search</button>
+                    <button class="post" id="post-report">Post</button>
+                </div>
+            </div>
+            <!--ask for payment-->
+            <div id="offerModal" class="payment-modal">
+                <div class="payment-modal-content">
+                    <span class="payment-close-btn" id="closeModalBtn">&times;</span>
+                    <h2>Special Offer</h2>
+                    <p>You will pay <strong style="color: #4379F2;font-size: 20px;">$49</strong> to submit your post. <br> <p style="font-size: 12px;margin-bottom: 5vh;margin-top: 5vh;">Do you accept?</p></p>
+                    <div class="offerBtns">
+                        <button id="declineBtn" class="declineBtn">No, that's ok</button>
+                        <button id="acceptBtn" class="acceptBtn">Yes, I want to post</button>
+                
+                    </div>
+                </div>
+            </div>
+        
+            <!--loading indicator-->
+            <div class="loading-overlay" id="loading-overlay">
+                <div class="loading-modal">
+                    <!--loading animation-->
+                    <div class="loading">
+                        <h2></h2><br>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                        
+                </div>
+            </div>
+            <!--post form modal -->
+            <div class="modal-overlay" id="modalOverlay">
+                <div class="modal">
+                    <button class="close-modal-btn" onclick="closeModal()">x</button>
+                    <div class="modal-header" id="modal-header">Reporter Info</div>
+                    <div class="modal-content">
+                        <div class="form-container">
+                            <div class="progress-bar">
+                                <div class="progress" id="progress"></div>
+                            </div>
+
+                            <!--progressive form-->
+                        <form id="progressiveForm" enctype="multipart/form-data">
+                            <!--reporter info-->
+                            <!--field 1-->
+                            <div class="form-step active" data-step="1">
+                                <div class="form-group">
+                                    <label for="name"></label>
+                                    <input type="text" id="name" name="reporter_name" placeholder="What's your name?" required>
+                                </div>
+                            </div>
+                            <!--reporter email-->
+                            <div class="form-step" data-step="2">
+                                <div class="form-group">
+                                    <label for="reporter_email"></label>
+                                    <input type="text"  name="reporter_email" id="reporter_email" placeholder="What's your email?" required>
+                                </div>
+                            </div>
+                            <!--field 2-->
+                            <div class="form-step" data-step="3">
+                                <div class="form-group">
+                                    <label for="reporter_street_address"></label>
+                                    <input type="text"  name="reporter_street_address" id="reporter_street_address" placeholder="What's your address?" required>
+                                </div>
+                            </div>
+                            <!--field 3-->
+                            <div class="form-step" data-step="4">
+                                <div class="form-group">
+                                    <label for="reporter_city"></label>
+                                    <input type="text"  name="reporter_city" id="reporter_city" placeholder="What city do you live in?" required>
+                                </div>
+                            </div>
+                            <!--field 3-->
+                            <div class="form-step" data-step="5">
+                                <div class="form-group">
+                                    <label for="state"></label>
+                                    <input type="text" id="state"  name="reporter_state" placeholder="What state do you live in?" required>
+                                </div>
+                            </div>
+                            <!--field 3-->
+                            <div class="form-step" data-step="6">
+                                <div class="form-group">
+                                    <label for="zipcode"></label>
+                                    <input type="text"  name="reporter_zipcode" id="zipcode" placeholder="What's your zipcode?" required>
+                                </div>
+                            </div>
+                            <!--field 3-->
+                            <div class="form-step" data-step="7">
+                                <div class="form-group">
+                                    <label for="country"></label>
+                                    <input type="text" id="country"  name="reporter_country" placeholder="What country do you live in?" required>
+                                </div>
+                            </div>
+                            <!--radio options-->
+                            <div class="form-step" data-step="8">
+                                <div class="form-group">
+                                    <label>Do you want to upload a video?</label>
+                                    <div class="radio-group">
+                                        <input type="radio" id="yes" name="videoUpload" value="yes" onclick="toggleVideoInput()">
+                                        <label for="yes">Yes</label>
+                                        <input type="radio" id="no" name="videoUpload" value="no" checked onclick="toggleVideoInput()">
+                                        <label for="no">No</label>
+                                    </div>
+                                        
+                                </div>
+                            </div>
+
+                            <!--file input-->
+
+                            <div class="form-group file-input">
+                                <!-- Upload icon as SVG -->
+                                <div class="upload-container"  id="upload-container" onclick="triggerFileUpload()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48" fill="#007BFF">
+                                        <path d="M480 856q-16 0-28-12t-12-28V581L355 666q-12 12-28.5 11.5T298 666q-12-12-12-28t12-28l170-170q5-5 10.5-7.5T490 430q6 0 11 2.5t10 7.5l170 170q12 12 11.5 28.5T681 666q-12 12-28 12t-28-12L520 581v235q0 16-12 28t-28 12Zm-240 80q-37 0-63.5-26.5T150 846V456q0-37 26.5-63.5T240 366h187l46-46h74q13 0 21.5 8.5T577 350l62 67h81q37 0 63.5 26.5T810 456v390q0 37-26.5 63.5T720 936H240Zm0-60h480q14 0 23-9t9-23V456q0-14-9-23t-23-9h-98l-77-83h-90l-77 83H240q-14 0-23 9t-9 23v388q0 14 9 23t23 9Zm0-423v-32 443-443Z"/>
+                                    </svg>
+                                    <span class="file-name" id="fileName">No file selected</span>
+                                </div>
+                            </div>
+                            <!--file input end-->
+
+                            <div class="form-step" data-step="9">
+                                <div class="form-group">
+                                    <label for="reporter_phone"></label>
+                                    <input type="tel" name="reporter_phone" id="reporter_phone" placeholder="What's your cellphone number?" required>
+                                </div>
+                            </div>
+
+                            <div class="form-step" data-step="10">
+                                <div class="form-group">
+                                    <label for="">Please upload a government-issued ID (eg. Passport, Driver's License, State ID, etc)</label>
+                                    <input type="text" style="display: none;">
+                                </div>
+                                
+                            </div>
+                            <div class="form-group file-input" id="img-input">
+                                <!-- Upload icon as SVG -->
+                                <div class="image-upload-container"  id="image-upload-container" onclick="triggerImageUpload()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48" fill="#007BFF">
+                                        <path d="M480 856q-16 0-28-12t-12-28V581L355 666q-12 12-28.5 11.5T298 666q-12-12-12-28t12-28l170-170q5-5 10.5-7.5T490 430q6 0 11 2.5t10 7.5l170 170q12 12 11.5 28.5T681 666q-12 12-28 12t-28-12L520 581v235q0 16-12 28t-28 12Zm-240 80q-37 0-63.5-26.5T150 846V456q0-37 26.5-63.5T240 366h187l46-46h74q13 0 21.5 8.5T577 350l62 67h81q37 0 63.5 26.5T810 456v390q0 37-26.5 63.5T720 936H240Zm0-60h480q14 0 23-9t9-23V456q0-14-9-23t-23-9h-98l-77-83h-90l-77 83H240q-14 0-23 9t-9 23v388q0 14 9 23t23 9Zm0-423v-32 443-443Z"/>
+                                    </svg>
+                                    <span class="file-name" id="imageName">No file selected</span>
+                                </div>
+                            </div>
+                            <!--reporter end-->
+
+                            <!--subject info start-->
+                            <!--field 8-->
+                            <div class="form-step" data-step="11">
+                                <div class="form-group">
+                                    <label for="subject_name"></label>
+                                    <input type="text" name="subject_name" id="subject_name" placeholder="What's the subject's name?" required>
+                                </div>
+                            </div>
+                            
+                            <!--test start-->
+
+                            <div class="form-step" data-step="12">
+                                <div class="form-group">
+                                    <label>Do you have the subject's physical address?</label>
+                                    <div class="radio-group">
+                                        <input type="radio" id="yes_addy" name="address_question" value="yes" onclick="toggleSubjectAddress()">
+                                        <label for="yes">Yes, I know the subject's physical address.</label>
+                                        <input type="radio" id="no_addy" name="address_question" value="no" checked onclick="toggleSubjectAddress()">
+                                        <label for="no">No, I only know the subject's email address.</label>
+                                    </div>
+                                        
+                                </div>
+                            </div>
+                            <!--test end-->
+
+                            <!---->
+                            <div class="form-group">
+                                <label for="subject_address"></label>
+                                <input type="text" name="subject_address" id="subject_address" placeholder="What's the subject's Email Address?" required>
+                            </div>
+
+                            <!--field 11-->
+                            <div class="form-step" data-step="13">
+                                <div class="form-group">
+                                    <label for="subject_city"></label>
+                                    <input type="text" name="subject_city" id="subject_city" placeholder="In what city does the subject reside?" required>
+                                </div>
+                            </div>
+                            <!--field 12-->
+                            <div class="form-step" data-step="14">
+                                <div class="form-group">
+                                    <label for="subject_state"></label>
+                                    <input type="text" name="subject_state" id="subject_state" placeholder="In what state does the subject live?" required>
+                                </div>
+                            </div>
+                            <!--field 13-->
+                            <!--field 9-->
+                            <div class="form-step" data-step="15">
+                                <div class="form-group">
+                                    <label for="subject_zip"></label>
+                                    <input type="text" name="subject_zip" id="subject_zip" placeholder="What's the zipcode of the subject?" required>
+                                </div>
+                            </div>
+                            <!--field 14-->
+
+                            <div class="form-step" data-step="16">
+                                <div class="form-group">
+                                    <label for="subject_country"></label>
+                                    <input type="text" name="subject_country" id="subject_country" placeholder="In what country does the subject live?" required>
+                                </div>
+                            </div>
+
+                            <div class="form-step" data-step="17">
+                                <div class="form-group">
+                                    <label for="subject_phone"></label>
+                                    <input type="tel" name="subject_phone" id="subject_phone" placeholder="What's the subject's cellphone number?" required>
+                                </div>
+                            </div>
+                            <!--subject info end-->
+
+
+                            <!--field 10-->
+                            <!--this is part of incident info-->
+                            <!--start of incident info-->
+                            <div class="form-step" data-step="18">
+                                <div class="form-group">
+                                    <label for="incident_type"></label>
+                                    <input type="text" name="incident_type" id="incident_type" placeholder="What type of incident occurred (eg. Sexual Assault, Rape, Sexual Abuse, Sexual Harassment, etc.)" required>
+                                </div>
+                            </div>
+
+                            <div class="form-step" data-step="19">
+                                <div class="form-group">
+                                    <label for="incident_details"></label>
+                                    
+                                        <input type="text" name="incident_details" id="incident_details"  class="incident_details" placeholder="Tell us more about the incident in detail. " required>
+                    
+                                    
+                                </div>
+                            </div>
+
+                            <div class="form-step" data-step="20">
+                                <div class="form-group">
+                                    <label for="incident_date">When did the incident occur?</label>
+                                    <input type="date" name="incident_date" id="incident_date" placeholder="" required>
+                                </div>
+                            </div>
+                            
+                            
+                            <!--field 9-->
+                            <div class="form-step" data-step="21">
+                                <div class="form-group">
+                                    <label for="incident_address"></label>
+                                    <input type="text" name="incident_address" id="incident_address" placeholder="At what address did the incident occur?" required>
+                                </div>
+                            </div>
+
+                            <!--field 11-->
+                            <div class="form-step" data-step="22">
+                                <div class="form-group">
+                                    <label for="incident_city"></label>
+                                    <input type="text" name="incident_city" id="incident_city" placeholder="In what city did the incident occur?" required>
+                                </div>
+                            </div>
+                            <!--field 12-->
+                            <div class="form-step" data-step="23">
+                                <div class="form-group">
+                                    <label for="incident_state"></label>
+                                    <input type="text" name="incident_state" id="incident_state" placeholder="In what state did the incident occur?" required>
+                                </div>
+                            </div>
+                            <!--field 13-->
+                            <!--field 9-->
+                            <div class="form-step" data-step="24">
+                                <div class="form-group">
+                                    <label for="incident_zip"></label>
+                                    <input type="text" name="incident_zip" id="incident_zip" placeholder="In what zipcode did the incident occur?" required>
+                                </div>
+                            </div>
+                            <!--field 14-->
+                            <div class="form-step" data-step="25">
+                                <div class="form-group">
+                                    <label for="incident_country"></label>
+                                    <input type="text" name="incident_country" id="incident_country" placeholder="In what country did the incident occur?" required>
+                                </div>
+                            </div>
+                            <!--end of incident info-->
+
+
+
+                             <!--field 16-->
+                             <!--
+                             Report, Answer, Reply, Sur-Reply, Motion w. Type
+                             -->
+                             <div class="form-step" data-step="26">
+                                <div class="form-group">
+                                    <label for="report_type">What type of incident are you reporting?</label>
+                                    <select id="report_type" name="report_type" required>
+                                        <option value="">--Please choose an option--</option>
+                                        <option value="report">Report</option>
+                                        <option value="answer">Answer</option>
+                                        <option value="reply">Reply</option>
+                                        <option value="sur_reply">Sur-Reply</option>
+                                        <option value="motion">Motion with Type</option>
+
+                                    </select>
+                            
+                                </div>
+                            </div>
+
+                            <!--field 17-->
+                            <div class="form-step" data-step="27">
+                                <div class="form-group">
+                                    <label for="today_date">What's today's date?</label>
+                                    <input type="date" name="today_date" id="today_date" placeholder="" required>
+                                </div>
+                            </div>
+
+                            <!--field 18-->
+                            
+
+                            <div class="form-step" data-step="28">
+                                <div class="form-group">
+                                    <label>Are you reporting on behalf of someone else?</label>
+                                    <div class="radio-group">
+                                        <input type="radio" id="yes_alt" name="altReport" value="yes" onclick="toggleAltReport()">
+                                        <label for="yes">Yes</label>
+                                        <input type="radio" id="no_alt" name="altReport" value="no" checked onclick="toggleAltReport()">
+                                        <label for="no">No</label>
+                                    </div>
+                                        
+                                </div>
+                            </div>
+
+                            <!--file input-->
+
+                            
+                                <div class="form-group alt_report_name" id="alt_report_name">
+                                    <label for="alt_reporter" class="alt_reporter"></label>
+                                    <input type="text" name="alt_reporter_input" id="alt_reporter_input"  class="alt_reporter_input" placeholder="What's the person's name?" required>
+                                </div>
+
+                                <!--
+                                <div class="form-group file-input">
+                                    <label for="videoFile" class="file-input-label">Upload your video:</label>
+                                    <input type="file" id="videoFile" name="videoFile" accept="video/*">
+                                </div>
+                                
+                                -->
+
+                                
+                            
+                            
+
+
+
+                    
+
+                            
+                            
+                            <div class="button-container">
+                                <button type="button" class="back-button" id="backBtn" onclick="previousStep()">Back</button>
+                                <button type="button" class="next-button" id="nextBtn" onclick="nextStep()">Next</button>
+                
+                            </div>
+                        </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <!--display area-->
+            <div class="display-container">
+                <!--if there are posts-->
+                <% if (posts && posts.length > 0) { %>
+                    
+                    <div class="posts-container">
+                        <!--start of post 1-->
+                        <% for(let post of posts) { %>
+                            <!--
+                                <a href="http://localhost:3000/view-post/?post_id=<%= post.report_id%>" style="text-decoration: none;">
+                            -->
+                                <div class="post-wrapper">
+                                    <div class="post-top">
+                                        <!--name of reporter-->
+                                        <div class="poster-name" style="color: black;"><%=post.reporter_name %> </div>
+                                        <!--post tags-->
+                                        <div class="post-tags">
+                                            <% if (post.videoUpload === 'yes') { %>
+                                                <div class="video-presence">Video</div>
+                                            <% } else { %>
+                                            <% } %>
+    
+                                            <div class="incident-type"><%=post.incident_type %></div>
+                                            <div class="report-type"><%=post.report_type %></div>
+                                        </div>
+                                    </div>
+                                    <div class="post-middle" style="color: black;">
+                                         
+                                        <%=post.incident_details %> 
+                                    </div>
+                                    <div class="post-bottom">
+                                        <a href="http://localhost:3000/view-post/?post_id=<%= post.report_id%>" style="text-decoration: none;margin-left: 0;">
+                                            <div class="post-view-link">
+
+                                                View Post
+                                                <span class="material-symbols-outlined">arrow_outward</span>
+        
+                                            
+                                            </div>
+                                        </a>
+                                        <div class="post-date"><%=post.date_submitted %></div>
+                                    </div>
+                                </div>
+                            
+                        <% } %>
+                    
+                        
+                        <!--end of post 1-->
+                        
+                    
+                <% } else { %>
+                    <div class="hero-container">
+                        <div class="hero-text">
+                            <div class="hero-text-wrapper">
+                                <div class="hero-title">Rape Report Database.com.</div>
+                                <div class="hero-desc">
+                                    A Publicly-Available, Searchable and Scrapeable Database for Persons who have been Raped, or experienced any other form of Sexual Misconduct (Sexual Assault, Sexual Abuse or Sexual Harassment), to Report what was Done to them, so the whole-World can See and Know about it, in-Perpetuity.
+    
+                                </div>
+                            </div>
+                            <div class="hero-text-buttons">
+                                <button class="hero-text-post" id="hero-post-report">Post</button>
+                                <button class="hero-text-learn"><a href="/about" style="text-decoration: none; color: white;cursor: pointer;">Learn More</a></button>
+                            </div>
+                        </div>
+                        <div class="hero-img">
+                            <img src="https://placehold.co/690x600" alt="">
+                        </div>
+                    </div>
+                <% } %>
+            
+                
+            </div>
+
+        <!--footer-->
+        <footer>
+            <div class="about-site">
+                <div class="website-name">Rape Report DB</div>
+                <div class="website-desc">
+                    The World's <strong>#1</strong> Searchable and Scrapeable Database for Persons who have been Raped, or experienced any other form of Sexual Misconduct (Sexual Assault, Sexual Abuse or Sexual Harassment).
+                </div>
+            </div>
+            <div class="contact">
+                <div class="contact-title">
+                    Contact US
+                </div>
+                <div class="contact-info">
+                    <strong>Email: </strong>rapereportdb@gmail.com <br>
+                    <strong>Phone: </strong>(201) 934-3306
+                </div>
+                <p class="contact-note">Responsive via Email</p>
+            </div>
+            <div class="relevant-links">
+                <div class="relevant-title">Support links</div>
+                <div class="all-links">
+                    <span><a href="/about" style="text-decoration: none;color: white;">About Rape Report DB</a></span><br>
+                    <span><a href="/FAQS" style="text-decoration: none;color: white;">Frequently Asked Questions</a></span>
+                </div>
+            </div>
+        </footer>
+        
+
+        <script src="./index.js"></script>
+
+        <script>
+
+            async function view_post(post_id) {
+                //console.log('view post clicked')
+                //http://localhost:3000/view-post/?post_id=${post_id}
+                const response = await fetch(`http://localhost:3000/view-post`, {
+                    method: 'GET'
+                });
+
+            }
+            function openFormModal() {
+                document.getElementById('loading-overlay').style.display = 'block';
+                    setTimeout(() => {
+                        document.getElementById('loading-overlay').style.display = 'none';
+                        //window.location.href="/"
+                        document.getElementById('modalOverlay').style.display = 'flex';
+
+                    }, 5000)
+
+            }
+
+                //document.getElementById('payment-modal-overlay').style.display = 'flex';
+
+                // Get elements
+                const modal = document.getElementById("offerModal");
+                const openModalBtn = document.getElementById("post-report");
+                //const heroOpenModalBtn = document.getElementById("hero-post-report");
+
+                const closeModalBtn = document.getElementById("closeModalBtn");
+                const acceptBtn = document.getElementById("acceptBtn");
+                const declineBtn = document.getElementById("declineBtn");
+
+                // Show modal when button is clicked
+                openModalBtn.addEventListener("click", () => {
+                    modal.style.display = "block";
+                });
+
+                
+                /*
+                heroOpenModalBtn.addEventListener("click", () => {
+                    modal.style.display = "block";
+                });
+                */
+
+                
+                // Hide modal when close button is clicked
+                closeModalBtn.addEventListener("click", () => {
+                    modal.style.display = "none";
+                });
+
+                // Handle accept and decline buttons
+                acceptBtn.addEventListener("click", () => {
+                    //alert("Offer accepted!");
+                    console.log("accept clicked")
+                    modal.style.display = "none"; // Hide modal
+                    openFormModal();
+
+                });
+
+                declineBtn.addEventListener("click", () => {
+                    //alert("Offer declined.");
+                    modal.style.display = "none"; // Hide modal
+                });
+
+                // Close modal when clicking outside of it
+                window.addEventListener("click", (event) => {
+                    if (event.target === modal) {
+                        modal.style.display = "none";
+                    }
+                });
+            
+
+            function closeModal() {
+                document.getElementById('modalOverlay').style.display = 'none';
+            }
+
+            function toggleImageInput(){
+                const imageInputLabel = document.querySelector('.image-upload-container');
+                imageInputLabel.style.display = 'none';
+            }
+            toggleImageInput();
+            function toggleVideoInput() {
+            const yesOption = document.getElementById("yes");
+            const noOption = document.getElementById("no");
+            const videoInputLabel = document.querySelector(".upload-container");
+            //const videoInput = document.getElementById("videoUpload");
+
+            if (yesOption.checked) {
+                videoInputLabel.style.display = "block"; // Show the label
+                //videoInput.style.display = "block"; // Show the file input
+            } else {
+                videoInputLabel.style.display = "none"; // Hide the label
+                //videoInput.style.display = "none"; // Hide the file input
+                //videoInput.value = ""; // Clear the file input if "No" is selected
+            }
+
+            if (noOption.checked) {
+                const fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.id = 'videoInput';
+                fileInput.accept = 'video/*';
+                fileInput.style.display = 'none';
+
+
+
+
+            }
+        }
+
+        // Initialize by hiding the video input field
+        toggleVideoInput();
+
+        //alt report
+        function toggleAltReport() {
+            const yesOption = document.getElementById("yes_alt");
+            const altInputLabel = document.querySelector(".alt_reporter");
+            const altInput = document.getElementById("alt_reporter_input");
+
+            if (yesOption.checked) {
+                altInputLabel.style.display = "block"; // Show the label
+                altInput.style.display = "block"; // Show the file input
+            } else {
+                altInputLabel.style.display = "none"; // Hide the label
+                altInput.style.display = "none"; // Hide the file input
+                altInput.value = ""; // Clear the file input if "No" is selected
+
+
+            }
+        }
+        toggleAltReport();
+
+        function toggleSubjectAddress() {
+            const yesOption = document.getElementById('yes_addy');
+            const addressInput = document.querySelector('input[name="subject_address"]')
+
+            if (yesOption.checked) {
+                addressInput.placeholder = "What's the subject's Physical Address?"
+            } else if (!yesOption.checked) {
+                addressInput.placeholder = "What's the subject's Email Address?"
+            }
+            
+        }
+
+        function triggerFileUpload() {
+            // Create a hidden input element for file selection
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.id = 'videoInput';
+            fileInput.accept = 'video/*';
+            fileInput.style.display = 'none';
+
+            // Trigger file dialog when input is clicked
+            fileInput.onchange = () => {
+                const fileNameDisplay = document.getElementById('fileName');
+
+                // Display the selected file name if a file is selected
+                if (fileInput.files.length > 0) {
+                    fileNameDisplay.textContent = fileInput.files[0].name;
+                } else {
+                    fileNameDisplay.textContent = "No file selected";
+                }
+            };
+
+            // Programmatically click the input to open file dialog
+            fileInput.click();
+            document.body.appendChild(fileInput);
+
+        }
+
+        function triggerImageUpload() {
+            // Create a hidden input element for file selection
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.id = 'imageInput';
+            fileInput.accept = 'image/*';
+            fileInput.style.display = 'none';
+
+
+            // Trigger file dialog when input is clicked
+            fileInput.onchange = () => {
+                const fileNameDisplay = document.getElementById('imageName');
+
+                // Display the selected file name if a file is selected
+                if (fileInput.files.length > 0) {
+                    fileNameDisplay.textContent = fileInput.files[0].name;
+                } else {
+                    fileNameDisplay.textContent = "No file selected";
+                }
+            };
+
+            // Programmatically click the input to open file dialog
+            fileInput.click();
+            document.body.appendChild(fileInput);
+
+        }
+
+        /*
+        const thefile = document.getElementById('videoInput');
+        if (theFile) {
+            console.log("video: ", theFile.files);
+        }
+
+        */
+
+        
+
+        </script>
+    </body>
+
+</html>
