@@ -32,7 +32,7 @@ async function submitForm() {
             const formimageData = new FormData();
             formimageData.append('file', imageFile);
 
-            const response = await fetch('http://localhost:5001/upload', {
+            const response = await fetch('http://34.201.173.137:5001/upload', {
                 method: 'POST',
                 body: formimageData
             });
@@ -65,7 +65,7 @@ async function submitForm() {
             const formvideoData = new FormData();
             formvideoData.append('file', videoFile);
 
-            const response = await fetch('http://localhost:5001/upload', {
+            const response = await fetch('http://34.201.173.137:5001/upload', {
                 method: 'POST',
                 body: formvideoData
             });
@@ -135,7 +135,7 @@ async function submitForm() {
             
             const data = {'report_type': report_type, 'videoUpload': videoUpload}
             const queryString = new URLSearchParams(data).toString();
-            window.location.href=`http://localhost:3000/stripe?${queryString}`
+            window.location.href=`http://34.201.173.137:3000/stripe?${queryString}`
         }, 2000)
 
 
@@ -306,7 +306,7 @@ searchInput.addEventListener('keypress', (event) => {
         const inputValue = searchInput.value;
         console.log('input value: ', inputValue);
         searchInput.value = '';
-        window.location.href = `http://localhost:3000/search/${inputValue}`;
+        window.location.href = `http://34.201.173.137:3000/search/${inputValue}`;
 
     }
 });

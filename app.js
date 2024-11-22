@@ -42,7 +42,7 @@ app.get("/FAQS", (req, res) => {
 }); 
 app.get('/', async(req, res) => {
     try {
-        const all_posts = await axios.get("http://localhost:5001/");
+        const all_posts = await axios.get("http://34.201.173.137:5001/");
         //console.log(all_posts.data);
         //
 
@@ -61,7 +61,7 @@ app.get('/view-post', async (req, res) => {
     try{
         const { post_id } = req.query;
         //console.log('post_id: ', post_id);
-        const post_details = await axios.get('http://localhost:5001/post-details', {
+        const post_details = await axios.get('http://34.201.173.137:5001/post-details', {
             params: {
                 post_id: post_id
             }

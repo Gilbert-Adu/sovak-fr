@@ -431,7 +431,7 @@
                                         <%=post.incident_details %> 
                                     </div>
                                     <div class="post-bottom">
-                                        <a href="http://localhost:3000/view-post/?post_id=<%= post.report_id%>" style="text-decoration: none;margin-left: 0;">
+                                        <a href="http://34.201.173.137:3000/view-post/?post_id=<%= post.report_id%>" style="text-decoration: none;margin-left: 0;">
                                             <div class="post-view-link">
 
                                                 View Post
@@ -509,7 +509,7 @@
             async function view_post(post_id) {
                 //console.log('view post clicked')
                 //http://localhost:3000/view-post/?post_id=${post_id}
-                const response = await fetch(`http://localhost:3000/view-post`, {
+                const response = await fetch(`http://34.201.173.137:3000/view-post`, {
                     method: 'GET'
                 });
 

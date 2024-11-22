@@ -46,7 +46,7 @@ async function processInfo() {
         }
 
 
-        const response = await fetch('http://localhost:5001/create-report', {
+        const response = await fetch('http://34.201.173.137:5001/create-report', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -57,7 +57,7 @@ async function processInfo() {
         const data = await response.json();
         console.log("i hit here 3!")
         console.log('Response from python backend: ', data);
-        window.location.href = '/';
+        window.location.href = 'http://34.201.173.137:3000/';
 
 
     }catch(err) {
