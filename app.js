@@ -150,5 +150,4 @@ app.get("/search/:query", (req, res) => {
     res.status(200).send("query is sent");
 });
 app.listen(port, () => {
-    console.log('up on 3000')
-})
+    console.log('up on

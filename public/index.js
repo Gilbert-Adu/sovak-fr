@@ -306,10 +306,4 @@ searchInput.addEventListener('keypress', (event) => {
         const inputValue = searchInput.value;
         console.log('input value: ', inputValue);
         searchInput.value = '';
-        window.location.href = `http://34.201.173.137:3000/search/${inputValue}`;
-
-    }
-});
-
-
-
+        window.location.href = `http://34.201.173.137:3000/search/${inputVal
