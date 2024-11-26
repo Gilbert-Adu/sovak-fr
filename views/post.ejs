@@ -260,4 +260,106 @@
 
             const commentButton = document.getElementById('commentButton');
             async function submitComment() {
-                const post_id = <%- JSON.stringify
+                const post_id = <%- JSON.stringify(post_details.data.report_id) %>;
+                console.log("total comments is: ", localStorage.getItem('total_comments'))
+                //console.log("parse is giving: ", JSON.parse(localStorage.getItem('total_comments')))
+
+                
+                
+                //sessionStorage.setItem('photo_id', JSON.stringify(data.fileUrl));
+                if (JSON.parse(localStorage.getItem('total_comments')) !== null) {
+                    //if the commenter has already paid for comments
+                    if (parseInt(localStorage.getItem('total_comments'),10) > 0) {
+
+                        const name = document.getElementById('name').value;
+                        const comment = document.getElementById('comment').value;
+
+
+                        const payload = {
+                            'author': name,
+                            'post_id': post_id,
+                            'comment_body': comment
+                        }
+                        if (name != '' && comment != ''){
+                            try {
+                            //http://34.201.173.137:5001/create-comment
+                            const response = await fetch('http://localhost:5001/create-comment', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(payload)
+                            });
+
+                            if (response.ok) {
+                                localStorage.setItem('total_comments', JSON.stringify(parseInt(localStorage.getItem('total_comments'),10) - 1));
+
+
+                                setTimeout(() => {
+                                    //http://34.201.173.137:3000/pay-to-vote-stripe
+                                    let link_to = "http://localhost:3000/view-post/?post_id=" + <%- JSON.stringify(post_details.data.report_id) %>;
+                                    window.location.href = link_to;
+                                }, 2000)
+
+
+
+                                console.log("successfully sent comment")
+                            }else {
+                                console.log("failed to send comment")
+                            }
+
+                            }catch(error) {
+                                console.error("Error sending comment: ", error);
+                            }
+
+                        }
+
+
+                    }else {
+                        //if the commenter has used up all their commenting tokens
+                        const offerModal = document.getElementById("offerModal");
+                        const acceptBtn = document.getElementById("acceptBtn");
+                        const declineBtn = document.getElementById("declineBtn");
+                        offerModal.style.display = 'block';
+                        acceptBtn.innerText = "Proceed";
+                        let commenterID = generateRandomString();
+                        sessionStorage.setItem('redirectUrl', JSON.stringify('http://localhost:3000/view-post/?post_id=' + <%- JSON.stringify(post_details.data.report_id) %>));
+
+                        
+                        
+
+                    }
+                }else {
+                    //if the commenter has not paid yet
+                        const offerModal = document.getElementById("offerModal");
+                        const acceptBtn = document.getElementById("acceptBtn");
+                        const declineBtn = document.getElementById("declineBtn");
+                        offerModal.style.display = 'block';
+                        acceptBtn.innerText = "Proceed";
+                        sessionStorage.setItem('redirectUrl', JSON.stringify('http://localhost:3000/view-post/?post_id=' + <%- JSON.stringify(post_details.data.report_id) %>));
+
+                        
+                }
+
+
+
+
+                
+
+
+                
+
+
+                
+
+            }
+            
+
+
+
+
+
+        </script>
+
+    </body>
+</html>

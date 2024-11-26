@@ -101,4 +101,9 @@ stripe.retrievePaymentIntent(clientSecret).then(({paymentIntent}) => {
       break;
 
     default:
-      message
+      message.innerText = 'Something went wrong.';
+      break;
+  }
+});
+    </script>
+</html>
