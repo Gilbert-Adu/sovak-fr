@@ -484,4 +484,37 @@ footer {
 
 .contact-title {
   margin-left: 2vw;
-  margin-top:
+  margin-top: 2vh;
+  font-weight: bold;
+}
+.contact-info {
+  font-size: 12px;
+  margin-left: 2vw;
+  margin-top: 2vh;
+
+}
+.contact-note{
+  margin-left: 2vw;
+  margin-top: 2vh;
+  font-size: 10px;
+}
+
+.relevant-links {
+  width: 30%;
+}
+
+.relevant-title {
+  margin-left: 2vw;
+  margin-top: 2vh;
+  font-weight: bold;
+
+}
+.all-links {
+  margin-left: 2vw;
+  margin-top: 2vh;
+  font-size: 12px;
+  cursor: pointer;
+
+}
+  
+

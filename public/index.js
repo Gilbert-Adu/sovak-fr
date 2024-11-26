@@ -307,4 +307,13 @@ searchInput.addEventListener('keypress', (event) => {
 
     if (event.key === 'Enter') {
         const inputValue = searchInput.value;
-        console.log('input value: 
+        console.log('input value: ', inputValue);
+        searchInput.value = '';
+        //http://34.201.173.137:3000/search/${inputValue}
+        window.location.href = `http://localhost:3000/search/${inputValue}`;
+
+    }
+});
+
+
+
