@@ -42,7 +42,8 @@ app.get("/FAQS", (req, res) => {
 }); 
 app.get('/', async(req, res) => {
     try {
-        const all_posts = await axios.get("http://34.201.173.137:5001/");
+        //http://34.201.173.137:5001/
+        const all_posts = await axios.get("http://localhost:5001/");
         //console.log(all_posts.data);
         //
 
@@ -61,13 +62,21 @@ app.get('/view-post', async (req, res) => {
     try{
         const { post_id } = req.query;
         //console.log('post_id: ', post_id);
-        const post_details = await axios.get('http://34.201.173.137:5001/post-details', {
+        //http://34.201.173.137:5001/post-details
+        const post_details = await axios.get('http://localhost:5001/post-details', {
             params: {
                 post_id: post_id
             }
         })
-        //console.log(post_details)
-        res.render('post', {post_details: post_details})
+        const comments = await axios.get('http://localhost:5001/get-comments', {
+            params: {
+                post_id: post_id
+            }
+        })
+
+
+        //console.log(comments.data)
+        res.render('post', {post_details: post_details, comments: comments.data})
     
 
     }catch(error){
@@ -111,15 +120,15 @@ app.get('/stripe', async(req, res) => {
 app.get('/pay-to-vote-stripe', async(req, res) => {
 
     //const total = parseInt(req.body.price) * parseInt(req.body.quantity) ;
-    const total = 49
+    const total = 12.25
     const paymentIntent = await stripe.paymentIntents.create({
-        amount: total * 0.01,
+        amount: total * 100,
         currency: 'usd',
         automatic_payment_methods: {
             enabled: true
         }
     })
-    res.render('stripe', {client_secret: paymentIntent.client_secret})
+    res.render('commentstripe', {client_secret: paymentIntent.client_secret})
 
 
     //res.render('stripe');
@@ -128,6 +137,9 @@ app.get('/pay-to-vote-stripe', async(req, res) => {
 
 app.get('/confirm-payment', (req, res) => {
     res.render('confirmation');
+});
+app.get('/confirm-comment-payment', (req, res) => {
+    res.render('commentconfirmation');
 });
 
 const storage = multer.memoryStorage(); // or configure for file storage

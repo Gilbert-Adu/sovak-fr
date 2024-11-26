@@ -111,6 +111,38 @@ html, body {
 
 /*mobile*/
 @media (max-width: 600px){
+  footer {
+    margin-bottom: 0;
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .about-site {
+    width: 50%;
+    height: 100%;
+    margin: 0;
+  }
+  .contact{
+    float: right;
+    display: none;
+  }
+
+
+.relevant-links {
+  width: 50%;
+  margin-right: 0;
+}
+.contact-info {
+  font-size: 12px;
+  margin-left: 2vw;
+  margin-top: 2vh;
+  width: 100%;
+
+}
+
 
     .post-details-event {
         display: flex;
@@ -417,7 +449,6 @@ html, body {
 }
 
 footer {
-  height: 20vh;
   margin-top: 5vh;
   display: flex;
   flex-direction: row;

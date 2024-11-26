@@ -114,7 +114,7 @@
                 <div class="payment-modal-content">
                     <span class="payment-close-btn" id="closeModalBtn">&times;</span>
                     <h2>Special Offer</h2>
-                    <p>You will pay <strong style="color: #4379F2;font-size: 20px;">$0.49</strong> to vote.<br> <p style="font-size: 12px;margin-bottom: 5vh;margin-top: 5vh;">Do you accept?</p></p>
+                    <p>You will pay <strong style="color: #4379F2;font-size: 20px;">$12.25</strong> for 25 comments.<br> <p style="font-size: 12px;margin-bottom: 5vh;margin-top: 5vh;">Do you accept?</p></p>
                     <div class="offerBtns">
                         <button id="declineBtn" class="declineBtn" onclick="declineOffer()">No, that's ok</button>
                         <button id="acceptBtn" class="acceptBtn" onclick="acceptOffer()">Yes, I want to vote</button>
@@ -130,12 +130,29 @@
              </div>
 
             <div class="comments-container">
-                <div class="comments-section-title">COMMENTS (1)</div>
-                <div class="comment-wrapper">
-                    <div class="commenter-name">John Williams</div>
-                    <div class="comment">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quos, sequi obcaecati suscipit, perspiciatis cupiditate iste architecto unde amet similique, eaque vero laborum voluptatum dolore consectetur rerum animi saepe accusantium.</div>
-                    <div class="comment-date"><strong style="color: black;">Submitted on: </strong> 11/18/2024</div>
+                <div class="comments-section-title">
+                    <% if (comments) { %>
+                        COMMENTS (<%= comments.length %>)
+                      <% } else { %>
+                        COMMENTS (0)
+                      <% } %>
                 </div>
+                <% if (comments) { %>
+
+                    <% for (let i = 0; i < comments.length; i++) { %>
+                        <!-- HTML or other code for each iteration -->
+                        <div class="comment-wrapper">
+                            <div class="commenter-name"><strong><%= comments[i].author %></strong></div>
+                            <div class="comment"><%= comments[i].comment_body %></div>
+                            <div class="comment-date"><strong style="color: black;">Submitted on: </strong> <%= comments[i].created_at %></div>
+                        </div>
+                    <% } %>
+                   
+                  <% } else { %>
+                  <% } %>
+
+
+            
                 <!--comment form start-->
                <div class="comment-form-wrapper">
                     <div class="comment-form-title">Leave a comment</div>
@@ -215,59 +232,32 @@
                     }, 2000)
 
                     setTimeout(() => {
-                        window.location.href="http://34.201.173.137:3000/pay-to-vote-stripe"
-                    }, 3500)
+                        //http://34.201.173.137:3000/pay-to-vote-stripe
+                        window.location.href="http://localhost:3000/pay-to-vote-stripe"
+                    }, 2000)
 
 
             }
 
             function declineOffer() {
+                document.getElementById("offerModal").style.display = 'none';
+                document.getElementById('loading-overlay').style.display = 'none';
+                        
+
+            }
+
+            function generateRandomString() {
+                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                const length = 10; // Length of the random string
+                let randomString = '';
+
+                for (let i = 0; i < length; i++) {
+                    const randomIndex = Math.floor(Math.random() * characters.length);
+                    randomString += characters[randomIndex];
+                }
 
             }
 
             const commentButton = document.getElementById('commentButton');
             async function submitComment() {
-                const post_id = <%- JSON.stringify(post_details.data.report_id) %>;
-                const name = document.getElementById('name').value;
-                const comment = document.getElementById('comment').value;
-
-                const payload = {
-                    'author': name,
-                    'post_id': post_id,
-                    'comment_body': comment
-                }
-
-                try {
-
-                    const response = await fetch('http://34.201.173.137:5001/create-comment', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (response.ok) {
-                        console.log("successfully sent comment")
-                    }else {
-                        console.log("failed to send comment")
-                    }
-
-                }catch(error) {
-                    console.error("Error sending comment: ", error);
-                }
-
-
-                
-
-            }
-            
-
-
-
-
-
-        </script>
-
-    </body>
-</html>
+                const post_id = <%- JSON.stringify

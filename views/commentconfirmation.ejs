@@ -28,47 +28,19 @@
         'payment_intent_client_secret'
         );
 
+async function payToComment() {
+    //const numComments = JSON.parse(sessionStorage.getItem('userData'));
+    localStorage.setItem('total_comments', JSON.stringify(25));
+    const redirectUrl = JSON.parse(sessionStorage.getItem('redirectUrl'));
+
+    setTimeout(() => {
+        window.location.href = redirectUrl;
+    })
 
 
-async function processInfo() {
-
-    try{
-        console.log("i hit here 1!")
-
-        const userData = JSON.parse(sessionStorage.getItem('userData'));
-        const videoUrl = JSON.parse(sessionStorage.getItem('video_url'));
-        const photoID = JSON.parse(sessionStorage.getItem('photo_id'));
-
-        console.log(userData); // { name: 'John Doe', age: 30 }
-        console.log("i hit here 2!")
-        const payload = {
-            "userData": userData,
-            "videoUrl": videoUrl,
-            "photoID": photoID
-        }
-
-        //http://34.201.173.137:5001/create-report
-        const response = await fetch('http://localhost:5001/create-report', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-        });
-                
-        const data = await response.json();
-        console.log("i hit here 3!")
-        console.log('Response from python backend: ', data);
-        //http://34.201.173.137:3000/
-        window.location.href = 'http://localhost:3000/';
-
-
-    }catch(err) {
-        console.log("error: ", err.message);
-
-    }
 
 }
+
 
 // Retrieve the PaymentIntent
 stripe.retrievePaymentIntent(clientSecret).then(({paymentIntent}) => {
@@ -84,7 +56,7 @@ stripe.retrievePaymentIntent(clientSecret).then(({paymentIntent}) => {
   switch (paymentIntent.status) {
     case 'succeeded':
       message.innerText = 'Success! Payment received.';
-      processInfo();
+      payToComment();
       console.log("payment confirmed")
 
       
@@ -98,7 +70,13 @@ stripe.retrievePaymentIntent(clientSecret).then(({paymentIntent}) => {
       message.innerText = 'Payment failed. Please try another payment method.';
       // Redirect your user back to your payment page to attempt collecting
       // payment again
+      message.innerText = 'Payment failed'
       break;
 
     default:
-      message
+      message.innerText = 'Something went wrong.';
+      break;
+  }
+});
+    </script>
+</html>
